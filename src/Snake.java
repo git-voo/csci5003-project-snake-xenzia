@@ -87,5 +87,27 @@ public class Snake {
         return lives;
     }
 
+    public List<Point> getBody() {
+        return Collections.unmodifiableList(body.subList(1, body.size()));
+    }
 
+    public void grow() {
+        growing = true;
+    }
+
+    public void decreaseLife() {
+        lives--;
+    }
+
+    public void decreaseLength(int amount) {
+        for (int i = 0; i < amount; i++) {
+            if (body.size() > 1) {
+                body.remove(body.size() - 1);
+            }
+        }
+    }
+
+    public void increaseLife() {
+        lives+;
+    }
 }
