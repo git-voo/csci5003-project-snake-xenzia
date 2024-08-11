@@ -108,6 +108,6 @@ public class Snake {
     }
 
     public void increaseLife() {
-        lives+;
+        lives++;
     }
 }
