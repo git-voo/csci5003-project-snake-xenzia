@@ -15,6 +15,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
 
     private boolean specialMealPresent;
     // Special meal variables (DangerMeal/HealthPack)
+    private MealFactory mealFactory;
     private Meal specialMeal;
     private Timer specialMealTimer;
     private Timer specialMealLifetimeTimer;
@@ -51,6 +52,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         meals = new ArrayList<Meal>();
 
         walls = new ArrayList<>();
+        mealFactory = new MealFactory();
 
         regularMealPresent = false;
         bonusMealPresent = false;
@@ -61,7 +63,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         timer.start();
 
         addInitialMeal();
-
+        startSpecialMealTimer();
     }
 
     private void addInitialMeal() {
@@ -111,13 +113,13 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
 
     private void spawnMeals() {
         if (!regularMealPresent) {
-            meals.add(new RegularMeal(generateRandomPosition()));
+            meals.add(mealFactory.create("regularMeal", generateRandomPosition()));
             regularMealPresent = true;
             mealCount++;
         }
 
         if (mealCount % 6 == 0 && !bonusMealPresent) {
-            meals.add(new BonusMeal(generateRandomPosition()));
+            meals.add(mealFactory.create("bonusMeal", generateRandomPosition()));
             bonusMealPresent = true;
             mealCount = 1;
         }
@@ -133,9 +135,9 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
                 if (!specialMealPresent) {
                     Random random = new Random();
                     if (random.nextBoolean()) {
-                        specialMeal = new HealthPack(generateRandomPosition());
+                        specialMeal = mealFactory.create("healthPack", generateRandomPosition());
                     } else {
-                        specialMeal = new DangerMeal(generateRandomPosition());
+                        specialMeal = mealFactory.create("dangerMeal", generateRandomPosition());
                     }
                     specialMealPresent = true;
                     startSpecialMealLifetimeTimer();
