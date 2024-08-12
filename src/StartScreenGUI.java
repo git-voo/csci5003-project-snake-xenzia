@@ -3,6 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A JPanel that displays the start screen of the game which also includes a
+ * countdown before starting the game.
+ */
 public class StartScreenGUI extends JPanel {
     private JButton playButton;
     private int countdown = 4;
@@ -10,6 +14,12 @@ public class StartScreenGUI extends JPanel {
     private StartScreenListener listener;
     private boolean countdownStarted = false;
 
+    /**
+     * Constructs a StartScreenGUI with the specified listener to handle the
+     * countdown.
+     *
+     * @param listener the listener to handle countdown completion
+     */
     public StartScreenGUI(StartScreenListener listener) {
         this.listener = listener;
         setLayout(new BorderLayout());
@@ -26,6 +36,9 @@ public class StartScreenGUI extends JPanel {
         add(playButton, BorderLayout.CENTER);
     }
 
+    /**
+     * Starts the countdown timer and disables the play button.
+     */
     private void startCountdown() {
         playButton.setEnabled(false);
         countdownStarted = true;
@@ -44,6 +57,11 @@ public class StartScreenGUI extends JPanel {
         countdownTimer.start();
     }
 
+    /**
+     * Paints the countdown on the panel when the countdown has started.
+     *
+     * @param g the graphics context on which to draw the countdown
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -60,6 +78,4 @@ public class StartScreenGUI extends JPanel {
             g.drawString(countdownText, panelWidth, panelHeight);
         }
     }
-
-
 }

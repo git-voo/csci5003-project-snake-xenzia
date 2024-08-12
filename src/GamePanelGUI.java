@@ -273,13 +273,12 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         timer.stop();
     }
 
-
     private void checkCollisions() {
 
         if (bonusMealPresent)
             hideBonusMealAfterTenSecs();
 
-            checkCollisionWithSpecialMeals();
+        checkCollisionWithSpecialMeals();
         checkCollisionWithMeals();
 
         checkCollisionsWithWalls();
@@ -288,7 +287,6 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
 
     }
 
-    
     private void checkCollisionWithSelf() {
         Point snakeHead = snake.getHead();
         List<Point> snakeBody = snake.getBody();
@@ -300,7 +298,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
             }
         }
     }
- 
+
     private void checkCollisionsWithWalls() {
         for (Wall wall : walls) {
             if (wall.collidesWith(snake.getHead())) {
@@ -310,15 +308,16 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
     }
 
-    private void checkLevelUp() { 
- 
-            if (score - lastLevelUpScore >= 60) {
-                lastLevelUpScore = score;
-                timer.setDelay((int) (timer.getDelay() * 0.9)); // Increase game speed by 10%
-                topPanel.updateLevel(topPanel.getLevel() + 1); // Assuming level starts from 1 and increases by 1 every 100 points
-                // topPanel.updateLevel(topPanel.getLevel() + 1);
-            }
-     
+    private void checkLevelUp() {
+
+        if (score - lastLevelUpScore >= 60) {
+            lastLevelUpScore = score;
+            timer.setDelay((int) (timer.getDelay() * 0.9)); // Increase game speed by 10%
+            topPanel.updateLevel(topPanel.getLevel() + 1); // Assuming level starts from 1 and increases by 1 every 100
+                                                           // points
+            // topPanel.updateLevel(topPanel.getLevel() + 1);
+        }
+
     }
 
     @Override

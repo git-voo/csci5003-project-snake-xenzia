@@ -3,11 +3,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A Jpanel that shows the end screen of the snake game,
+ * displaying the final score of the player and gives option to retry or exit
+ * the game
+ */
+
 public class EndScreenGUI extends JPanel {
     private int finalScore;
     private JButton exitButton;
     private JButton retryButton;
     private EndScreenListener listener;
+
+    /**
+     * Constructs an EndScreenGUI with the specified final score and listener.
+     *
+     * @param finalScore the final score to display on the end screen
+     * @param listener   the listener to handle button actions
+     */
 
     public EndScreenGUI(int finalScore, EndScreenListener listener) {
         this.finalScore = finalScore;
@@ -56,6 +69,5 @@ public class EndScreenGUI extends JPanel {
 
         setBackground(new Color(0, 128, 128)); // Match background color of the game
     }
-
 
 }

@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class TopPanelGUI extends JPanel { 
-    protected  final int DEFAULT_SCORE = 0;
+public class TopPanelGUI extends JPanel {
+    protected final int DEFAULT_SCORE = 0;
     private JLabel scoreLabel;
     private JLabel livesLabel;
     private int score = DEFAULT_SCORE;
@@ -21,8 +21,6 @@ public class TopPanelGUI extends JPanel {
         livesLabel = new JLabel("Lives: ");
         levelLabel = new JLabel("Level: " + level);
 
-        
-        
         add(scoreLabel);
         add(levelLabel);
         add(livesLabel);
@@ -39,7 +37,8 @@ public class TopPanelGUI extends JPanel {
         scoreLabel.setText("Score: " + score);
         repaint();
     }
-    public int getLevel(){
+
+    public int getLevel() {
         return this.level;
     }
 
@@ -55,10 +54,10 @@ public class TopPanelGUI extends JPanel {
     }
 
     private void drawHearts(Graphics g, int numHearts) {
-        int heartSize = 8;  
-        int spacing = 10;    
+        int heartSize = 8;
+        int spacing = 10;
         int x = livesLabel.getX() + livesLabel.getWidth() + 5; // Start after the "Lives:" label
-        int y = 10;         // Vertical position for hearts
+        int y = 10; // Vertical position for hearts
 
         for (int i = 0; i < numHearts; i++) {
             drawHeart(g, x, y, heartSize);
@@ -68,16 +67,16 @@ public class TopPanelGUI extends JPanel {
 
     private void drawHeart(Graphics g, int x, int y, int size) {
         g.setColor(Color.RED);
-        
+
         // Draw the left half of the heart
         g.fillArc(x, y, size, size, 0, 180);
-        
+
         // Draw the right half of the heart
         g.fillArc(x + size, y, size, size, 0, 180);
-        
+
         // Draw the bottom triangle of the heart
-        g.fillPolygon(new int[] {x, x + size, x + 2 * size}, 
-                      new int[] {y + size / 2, y + size + size / 2, y + size / 2}, 3);
+        g.fillPolygon(new int[] { x, x + size, x + 2 * size },
+                new int[] { y + size / 2, y + size + size / 2, y + size / 2 }, 3);
     }
 
 }
