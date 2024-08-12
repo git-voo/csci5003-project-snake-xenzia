@@ -25,7 +25,7 @@ public class HealthPack extends Meal implements ActionListener {
         blinkTimer.stop();
     }
 
-    @Overrideh
+    @Override
     public void draw(Graphics g) {
         if (isVisible) {
             g.setColor(Color.PINK);
