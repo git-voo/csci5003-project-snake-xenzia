@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class RegularMeal extends Meal {
+public class RegularMeal extends Meal implements MealType {
     public RegularMeal(Point position) {
         super(position, 10);
     }
@@ -14,5 +14,10 @@ public class RegularMeal extends Meal {
     public void draw(Graphics g) {
         g.setColor(Color.BLACK);
         super.draw(g);
+    }
+
+    @Override
+    public String getType() {
+        return "regularMeal";
     }
 }

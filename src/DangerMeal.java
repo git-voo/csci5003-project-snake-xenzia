@@ -4,7 +4,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DangerMeal extends Meal implements ActionListener {
+public class DangerMeal extends Meal implements ActionListener, MealType {
  
     private Timer blinkTimer;
     private boolean isVisible;
@@ -36,5 +36,10 @@ public class DangerMeal extends Meal implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Toggle visibility for blinking effect
         isVisible = !isVisible;
+    }
+
+    @Override
+    public String getType() {
+        return "dangerMeal";
     }
 }

@@ -16,6 +16,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
     private boolean specialMealPresent;
     // Special meal variables (DangerMeal/HealthPack)
     private MealFactory mealFactory;
+    private MealAction mealAction;
     private Meal specialMeal;
     private Timer specialMealTimer;
     private Timer specialMealLifetimeTimer;
@@ -163,7 +164,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
 
     private void hideBonusMealAfterTenSecs() {
         for (int i = 0; i < meals.size(); i++) {
-            if (meals.get(i) instanceof BonusMeal) {
+            if (meals.get(i).getType().equals("bonusMeal")) {
                 mealIndex = i;
                 break;
             }
@@ -227,11 +228,12 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         for (int i = 0; i < meals.size(); i++) {
             Meal meal = meals.get(i);
             if (snake.getHead().equals(meal.getPosition())) {
-                meal.applyEffect(snake);
-                if (meal instanceof RegularMeal) {
+                mealAction = new MealAction(meal);
+                mealAction.applyEffect(snake);
+                if (meal.getType().equals("regularMeal")) {
                     regularMealPresent = false;
                 }
-                if (meal instanceof BonusMeal) {
+                if (meal.getType().equals("bonusMeal")) {
                     bonusMealPresent = false;
                 }
                 score += meal.getSize();
@@ -246,7 +248,8 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
     private void checkCollisionWithSpecialMeals() {
         if (specialMealPresent && specialMeal != null) {
             if (snake.getHead().equals(specialMeal.getPosition())) {
-                specialMeal.applyEffect(snake);
+                mealAction = new MealAction(specialMeal);
+                mealAction.applyEffect(snake);
                 specialMealPresent = false;
                 specialMeal = null;
                 topPanel.updateLives(snake.getLives());
@@ -275,8 +278,6 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
 
         if (bonusMealPresent)
             hideBonusMealAfterTenSecs();
-        if (specialMealPresent)
-            // hideSpecialMealAfterTenSecs();
 
             checkCollisionWithSpecialMeals();
         checkCollisionWithMeals();

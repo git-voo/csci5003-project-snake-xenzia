@@ -1,15 +1,15 @@
 import java.awt.*;
 
-public abstract class Meal implements ApplyEffect {
+public  class Meal extends MealAction{
     protected Point position;
     protected int size;
 
     public Meal(Point position, int size) {
+        super();
         this.position = position;
         this.size = size;
     }
 
-    // public abstract void applyEffect(Snake snake);
 
     public void draw(Graphics g) {
         g.fillRect(position.x, position.y, size, size);
@@ -22,4 +22,6 @@ public abstract class Meal implements ApplyEffect {
     public Point getPosition() {
         return position;
     }
+
+ 
 }
