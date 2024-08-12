@@ -121,6 +121,42 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
 
     }
+      private void startSpecialMealTimer() {
+        final int MEAL_INTERVAL = 25000; // 25 seconds
+
+        specialMealTimer = new Timer(MEAL_INTERVAL, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!specialMealPresent) {
+                    Random random = new Random();
+                    if (random.nextBoolean()) {
+                        specialMeal = new HealthPack(generateRandomPosition());
+                    } else {
+                        specialMeal = new DangerMeal(generateRandomPosition());
+                    }
+                    specialMealPresent = true;
+                    startSpecialMealLifetimeTimer();
+                }
+            }
+        });
+        specialMealTimer.start();
+    }
+
+    private void startSpecialMealLifetimeTimer() {
+
+        specialMealLifetimeTimer = new Timer(SPECIAL_MEAL_LIFETIME, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                specialMealPresent = false;
+                specialMeal = null; // Remove the special meal
+                ((Timer) e.getSource()).stop(); // Stop the lifetime timer
+            }
+        });
+        specialMealLifetimeTimer.setRepeats(false); // Ensure it only runs once
+        specialMealLifetimeTimer.start();
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
