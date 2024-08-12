@@ -33,7 +33,7 @@ cd src
 If you’re using an IDE, simply import the project and it should handle the compilation for you. If you’re using the command line, navigate to the project directory and run:
 
 ```bash
-javac /*.java
+javac *.java
 ```
 
 ### 3. Run the Game
@@ -41,7 +41,7 @@ javac /*.java
 Once compiled, you can start the game by running the following command:
 
 ```bash
-java -cp SnakeGameGUI
+java SnakeGameGUI
 ```
 
 ### 4. Play the Game
