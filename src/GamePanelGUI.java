@@ -107,7 +107,20 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         // Right wall
         walls.add(new Wall(new Point(panelWidth - 10, 0), new Dimension(10, panelHeight)));
     }
+    private void spawnMeals() {
+        if (!regularMealPresent) {
+            meals.add(new RegularMeal(generateRandomPosition()));
+            regularMealPresent = true;
+            mealCount++;
+        }
 
+        if (mealCount % 6 == 0 && !bonusMealPresent) {
+            meals.add(new BonusMeal(generateRandomPosition()));
+            bonusMealPresent = true;
+            mealCount = 1;
+        }
+
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
