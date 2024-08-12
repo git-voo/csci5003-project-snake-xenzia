@@ -56,11 +56,11 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         bonusMealPresent = false;
         specialMealPresent = false;
         gameOver = false;
- 
+
         timer = new Timer(100, this);
         timer.start();
 
-        addInitialMeal(); 
+        addInitialMeal();
 
     }
 
@@ -88,6 +88,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
 
     }
+
     protected void createBorderWalls(JFrame frame) {
         // Get the size of the content pane of the frame
         Dimension frameSize = frame.getContentPane().getSize();
@@ -107,6 +108,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         // Right wall
         walls.add(new Wall(new Point(panelWidth - 10, 0), new Dimension(10, panelHeight)));
     }
+
     private void spawnMeals() {
         if (!regularMealPresent) {
             meals.add(new RegularMeal(generateRandomPosition()));
@@ -121,7 +123,8 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
 
     }
-      private void startSpecialMealTimer() {
+
+    private void startSpecialMealTimer() {
         final int MEAL_INTERVAL = 25000; // 25 seconds
 
         specialMealTimer = new Timer(MEAL_INTERVAL, new ActionListener() {
@@ -179,7 +182,8 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         lifeTimer.start();
 
     }
-     private Point generateRandomPosition() {
+
+    private Point generateRandomPosition() {
         Random random = new Random();
         int width = getWidth();
         int height = getHeight();
@@ -201,6 +205,7 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
 
         return new Point(x, y);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
@@ -216,6 +221,39 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
     }
 
+    private void checkCollisionWithMeals() {
+        for (int i = 0; i < meals.size(); i++) {
+            Meal meal = meals.get(i);
+            if (snake.getHead().equals(meal.getPosition())) {
+                meal.applyEffect(snake);
+                if (meal instanceof RegularMeal) {
+                    regularMealPresent = false;
+                }
+                if (meal instanceof BonusMeal) {
+                    bonusMealPresent = false;
+                }
+                score += meal.getSize();
+                topPanel.updateScore(score);
+                meals.remove(i);
+                break;
+            }
+
+        }
+    }
+
+    private void checkCollisionWithSpecialMeals() {
+        if (specialMealPresent && specialMeal != null) {
+            if (snake.getHead().equals(specialMeal.getPosition())) {
+                specialMeal.applyEffect(snake);
+                specialMealPresent = false;
+                specialMeal = null;
+                topPanel.updateLives(snake.getLives());
+                if (specialMealLifetimeTimer != null) {
+                    specialMealLifetimeTimer.stop();
+                }
+            }
+        }
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
