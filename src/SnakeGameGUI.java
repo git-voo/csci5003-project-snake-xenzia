@@ -2,9 +2,9 @@ import java.awt.Color;
 import javax.swing.*;
 
 /**
- * The main GUI class for the Snake Xenzia game, handling the start screen, game
+ * This is the  main GUI class for the Snake Xenzia game. it handles the start screen, game
  * panel, and end screen.
- * Implements StartScreenListener, GameOverListener, and EndScreenListener
+ * it also implements StartScreenListener, GameOverListener, and EndScreenListener
  * interfaces to handle various game events.
  */
 public class SnakeGameGUI extends JFrame

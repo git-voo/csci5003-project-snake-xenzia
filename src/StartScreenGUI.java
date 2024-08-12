@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * A JPanel that displays the start screen of the game which also includes a
+ * The StartScreen class is a JPanel that displays the start screen of the game and includes a
  * countdown before starting the game.
  */
 public class StartScreenGUI extends JPanel {

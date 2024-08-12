@@ -7,7 +7,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Represents a snake in the game with functionality to move, grow, and manage
+ * The Snake class represents a snake in the game with functionality to move, grow, and manage
  * lives.
  */
 public class Snake {

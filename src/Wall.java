@@ -1,13 +1,14 @@
 import java.awt.*;
 
 /**
- * Represents a wall that can be drawn on the screen and checked for collisions.
+ * the wall class represents a wall that can be drawn on the screen and also
+ * used to check for collisions.
  */
 public class Wall {
     private Rectangle bounds;
 
     /**
-     * Constructs a Wall object with the specified position and size.
+     * Constructs a Wall object specifying the position and the size of the wall.
      *
      * @param position the position of the wall's top-left corner
      * @param size     the dimensions of the wall
