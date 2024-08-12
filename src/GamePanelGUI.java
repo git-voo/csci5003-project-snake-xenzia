@@ -178,7 +178,29 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
 
         lifeTimer.start();
 
-    }git add 
+    }
+     private Point generateRandomPosition() {
+        Random random = new Random();
+        int width = getWidth();
+        int height = getHeight();
+        int wallThickness = 20;
+
+        // Ensure the dimensions are within the panel's size
+        if (width <= 0 || height <= 0) {
+            width = 800;
+            height = 600;
+        }
+
+        // Adjust the available area to exclude walls
+        int xRange = (width - 2 * wallThickness) / 10;
+        int yRange = (height - 2 * wallThickness) / 10;
+
+        // Generate random positions within the adjusted ranges
+        int x = wallThickness + random.nextInt(xRange) * 10;
+        int y = wallThickness + random.nextInt(yRange) * 10;
+
+        return new Point(x, y);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
