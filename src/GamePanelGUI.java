@@ -255,6 +255,58 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
     }
 
+
+
+
+    private void checkCollisions() {
+
+        if (bonusMealPresent)
+            hideBonusMealAfterTenSecs();
+        if (specialMealPresent)
+            // hideSpecialMealAfterTenSecs();
+
+            checkCollisionWithSpecialMeals();
+        checkCollisionWithMeals();
+
+        checkCollisionsWithWalls();
+
+        checkCollisionWithSelf();
+
+    }
+
+    
+    private void checkCollisionWithSelf() {
+        Point snakeHead = snake.getHead();
+        List<Point> snakeBody = snake.getBody();
+
+        for (Point bodyPoint : snakeBody) {
+            if (snakeHead.equals(bodyPoint)) {
+                gameOver();
+                break;
+            }
+        }
+    }
+ 
+    private void checkCollisionsWithWalls() {
+        for (Wall wall : walls) {
+            if (wall.collidesWith(snake.getHead())) {
+                gameOver();
+                break;
+            }
+        }
+    }
+
+    private void checkLevelUp() { 
+ 
+            if (score - lastLevelUpScore >= 60) {
+                lastLevelUpScore = score;
+                timer.setDelay((int) (timer.getDelay() * 0.9)); // Increase game speed by 10%
+                topPanel.updateLevel(topPanel.getLevel() + 1); // Assuming level starts from 1 and increases by 1 every 100 points
+                // topPanel.updateLevel(topPanel.getLevel() + 1);
+            }
+     
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         snake.changeDirection(e.getKeyCode());
