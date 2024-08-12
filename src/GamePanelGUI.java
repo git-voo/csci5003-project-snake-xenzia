@@ -255,7 +255,18 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
     }
 
+    public void setGameOverListener(GameOverListener listener) {
+        this.gameOverListener = listener;
 
+    }
+
+    public void gameOver() {
+        if (gameOverListener != null) {
+            gameOverListener.onGameOver(score);
+        }
+        gameOver = true;
+        timer.stop();
+    }
 
 
     private void checkCollisions() {
