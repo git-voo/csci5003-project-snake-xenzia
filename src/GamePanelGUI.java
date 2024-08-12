@@ -88,6 +88,25 @@ public class GamePanelGUI extends JPanel implements ActionListener, KeyListener 
         }
 
     }
+    protected void createBorderWalls(JFrame frame) {
+        // Get the size of the content pane of the frame
+        Dimension frameSize = frame.getContentPane().getSize();
+
+        int panelWidth = frameSize.width;
+        int panelHeight = frameSize.height;
+
+        // Clear existing walls if any (in case of resizing)
+        walls.clear();
+
+        // Top wall
+        walls.add(new Wall(new Point(0, 0), new Dimension(panelWidth, 10)));
+        // Bottom wall
+        walls.add(new Wall(new Point(0, panelHeight - 10), new Dimension(panelWidth, 10)));
+        // Left wall
+        walls.add(new Wall(new Point(0, 0), new Dimension(10, panelHeight)));
+        // Right wall
+        walls.add(new Wall(new Point(panelWidth - 10, 0), new Dimension(10, panelHeight)));
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
